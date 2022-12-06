@@ -1,5 +1,9 @@
 pipeline{
-    agent { docker { image: "node:lst" } }
+    agent { 
+        docker { 
+            image 'node:lts' 
+        } 
+    }
 
     stages {
         stage("Git clone"){
