@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: PROM
+  labels:
+    app: alexrumath-app
+spec:
+  replicas: 1
+  selector:
+    matchLable:
+      labels:
+        app: alexrumath-app
+  template:
+    metadata:
+      labels:
+        app: alexrumath-app
+    spec:
+      containers:
+        - name: app
+          image: alexrumath/app
+          ports:
+            - 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: PROM
+spec:
+  selector:
+    app: alexrumath-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 8080
+
