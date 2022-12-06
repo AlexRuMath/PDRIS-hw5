@@ -1,10 +1,22 @@
 pipeline{
-    agent any
+    agent { docker { image: "node:lst" } }
 
     stages {
         stage("Git clone"){
             steps {
-                
+                git url: "https://github.com/AlexRuMath/PDRIS-hw5/tree/master" 
+            }
+        }
+
+        stage("Install dependencies"){
+            steps {
+                sh "cd ./app && npm install"
+            }
+        }
+
+        stage("Testing"){
+            steps {
+                sh "npm test"
             }
         }
     }
