@@ -5,6 +5,10 @@ pipeline{
         } 
     }
 
+    triggers {
+        pollSCM 'H/2 * * * *'
+    }
+
     stages {
         stage("Git clone"){
             steps {
@@ -14,7 +18,7 @@ pipeline{
 
         stage("Install dependencies"){
             steps {
-                
+
                 sh "cd ./app && npm install"
             }
         }
