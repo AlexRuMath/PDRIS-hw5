@@ -1,15 +1,11 @@
-var express = require('express');
-var app = express();
+/*!
+ * express
+ * Copyright(c) 2009-2013 TJ Holowaychuk
+ * Copyright(c) 2013 Roman Shtylman
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
 
-app.get('/', function (req, res) {
-    res.send('{ "response": "Hello From Thetips4you" }');
-});
+'use strict';
 
-app.get('/will', function (req, res) {
-    res.send('{ "response": "Hello World" }');
-});
-app.get('/ready', function (req, res) {
-    res.send('{ "response": " Great!, It works!" }');
-});
-app.listen(process.env.PORT || 3000);
-module.exports = app;
+module.exports = require('./lib/express');
