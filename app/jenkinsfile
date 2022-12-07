@@ -23,7 +23,6 @@ pipeline{
 
         stage("Install dependencies"){
             steps {
-
                 sh "cd ./app && npm install"
             }
         }
@@ -31,7 +30,7 @@ pipeline{
         stage("Build docker image"){
             steps {
                 sh "cd ./app"
-                env.DOCKER_IMAGE = docker.build(env.DOCKER_IMAGE_NAME)
+                DOCKER_IMAGE = docker.build(env.DOCKER_IMAGE_NAME)
 
             }
         }
@@ -42,7 +41,7 @@ pipeline{
             }
             steps {
                 docker.withRegistry('https://registry.hub.docker.com', registryCred){
-                    env.DOCKER_IMAGE.push('latest')
+                    DOCKER_IMAGE.push('latest')
                 }
             }
         }
