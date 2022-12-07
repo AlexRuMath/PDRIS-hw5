@@ -29,8 +29,10 @@ pipeline{
 
         stage("Build docker image"){
             steps {
-                sh "cd ./app"
-                env.dockerImage = docker.build dockerImageName
+                scrip {
+                    sh "cd ./app"
+                    env.dockerImage = docker.build dockerImageName
+                }
             }
         }
 
@@ -39,8 +41,10 @@ pipeline{
                 registryCred = "docker"
             }
             steps {
-                docker.withRegistry('https://registry.hub.docker.com', registryCred){
-                    dockerImage.push('latest')
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', registryCred){
+                        dockerImage.push('latest')
+                    }
                 }
             }
         }
