@@ -27,22 +27,14 @@ pipeline{
             }
         }
 
-        stage("Build docker image"){
-            steps {
-                script {
-                    sh "cd ./app"
-                    env.dockerImage = docker.build(dockerImageName, "./app") 
-                }
-            }
-        }
-
-        stage("Push docker image to Hub"){
+        stage("Build and Push docker image to Hub"){
             environment {
                 registryCred = "docker"
             }
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', registryCred){
+                        env.dockerImage = docker.build(dockerImageName, "./app") 
                         env.dockerImage.push('latest')
                     }
                 }
