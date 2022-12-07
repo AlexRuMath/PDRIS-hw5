@@ -29,6 +29,7 @@ pipeline{
 
         stage("Build docker image"){
             steps {
+                
                 script {
                     sh "cd ./app"
                     env.dockerImage = docker.build dockerImageName
