@@ -1,4 +1,9 @@
 pipeline{
+    environment {
+        DOCKER_IMAGE_NAME = "alexrumath/app" 
+        DOCKER_IMAGE = ""
+    }
+
     agent { 
         docker { 
             image 'node:lts' 
@@ -7,11 +12,6 @@ pipeline{
 
     triggers {
         pollSCM '* * * * *'
-    }
-
-    environment {
-        DOCKER_IMAGE_NAME = "alexrumath/app" 
-        DOCKER_IMAGE = ""
     }
 
     stages {
