@@ -31,7 +31,7 @@ pipeline{
             steps {
                 script {
                     sh "cd ./app"
-                    env.dockerImage = docker.build(dockerImageName, "./app/Dockerfile") 
+                    env.dockerImage = docker.build(dockerImageName, "./app") 
                 }
             }
         }
