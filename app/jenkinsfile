@@ -42,7 +42,7 @@ pipeline{
         // }
 
         stage("Deploy to DEV"){
-            agent master
+            agent { master }
 
             steps{
                 script{
@@ -61,7 +61,7 @@ pipeline{
         }
 
         stage("Deploy to PROM"){
-            agent master
+            agent { master }
 
             steps{
                 script{
