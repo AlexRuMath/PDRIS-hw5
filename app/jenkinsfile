@@ -31,7 +31,6 @@ pipeline{
             steps {
                 sh "cd ./app"
                 DOCKER_IMAGE = docker.build(env.DOCKER_IMAGE_NAME)
-
             }
         }
 
