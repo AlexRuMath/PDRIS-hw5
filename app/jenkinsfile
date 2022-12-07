@@ -34,8 +34,8 @@ pipeline{
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', registryCred){
-                        env.dockerImage = docker.build(dockerImageName, "./app") 
-                        env.dockerImage.push('latest')
+                        dockerImage = docker.build(dockerImageName, "./app") 
+                        dockerImage.push('latest')
                     }
                 }
             }
