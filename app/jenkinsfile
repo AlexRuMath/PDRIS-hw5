@@ -27,24 +27,28 @@ pipeline{
             }
         }
 
-        stage("Build and Push docker image to Hub"){
-            environment {
-                registryCred = "docker"
-            }
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', registryCred){
-                        dockerImage = docker.build(dockerImageName, "./app") 
-                        dockerImage.push('latest')
-                    }
-                }
-            }
-        }
+        // stage("Build and Push docker image to Hub"){
+        //     environment {
+        //         registryCred = "docker"
+        //     }
+        //     steps {
+        //         script {
+        //             docker.withRegistry('https://registry.hub.docker.com', registryCred){
+        //                 dockerImage = docker.build(dockerImageName, "./app") 
+        //                 dockerImage.push('latest')
+        //             }
+        //         }
+        //     }
+        // }
 
         stage("Deploy to DEV"){
+            agent master
+
             steps{
                 script{
-                    kubernetesDeploy(config: "deployment-dev.yaml", kubeconfigId: "kubernetes")
+                    sh "docker stop ${dockerImageName}-dev"
+                    sh "docker build -t ${dockerImageName}-dev -f ./app/Dockerfile ./app"
+                    sh "docker run -p 3000 ${dockerImageName}-dev"
                 }
             }
         }
@@ -59,7 +63,9 @@ pipeline{
         stage("Deploy to PROM"){
             steps{
                 script{
-                    kubernetesDeploy(config: "deployment-prom.yaml", kubeconfigId: "kubernetes")
+                    sh "docker stop ${dockerImageName}-prom"
+                    sh "docker build -t ${dockerImageName}-prom -f ./app/Dockerfile ./app"
+                    sh "docker run -p 3001 ${dockerImageName}-prom"
                 }
             }
         }        
