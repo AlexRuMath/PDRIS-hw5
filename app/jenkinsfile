@@ -8,7 +8,8 @@ pipeline{
     stages {
         stage("Git clone"){
             steps {
-                git url: "https://github.com/AlexRuMath/PDRIS-hw5/tree/master" 
+                git url: "https://github.com/AlexRuMath/PDRIS-hw5"
+                    branch: "master" 
             }
         }
 
