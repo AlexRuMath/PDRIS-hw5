@@ -3,12 +3,7 @@ pipeline{
         dockerImageName = "alexrumath/app" 
         dockerImage = ""
     }
-
-    agent { 
-        docker { 
-            image 'node:lts' 
-        } 
-    }
+    agent any
 
     triggers {
         pollSCM '* * * * *'
@@ -22,6 +17,11 @@ pipeline{
         }
 
         stage("Install dependencies"){
+            agent { 
+                docker { 
+                    image 'node:lts' 
+                    } 
+            }           
             steps {
                 sh "cd ./app && npm install"
             }
@@ -44,6 +44,11 @@ pipeline{
 
 
         stage("Testing"){
+            agent { 
+                docker { 
+                    image 'node:lts' 
+                    } 
+            }
             steps {
                 sh "cd ./app && npm test"
             }
