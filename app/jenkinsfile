@@ -38,7 +38,7 @@ pipeline{
 
             steps{
                 script{
-                    sh "deploy-prod.sh"
+                    sh "cd ./ && deploy-dev.sh"
                 }
             }
         }
@@ -55,7 +55,7 @@ pipeline{
 
             steps{
                 script{
-                    sh "deploy-prod.sh"
+                    sh "cd ./ && deploy-prod.sh"
                 }
             }
         }        
