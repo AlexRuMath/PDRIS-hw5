@@ -56,8 +56,7 @@ pipeline{
         stage("Deploy to PROM"){
             steps{
                 script{
-                    sh "cd ./app"
-                    sh "deploy-prod.sh"
+                    sh "cd ./app && ./deploy-prod.sh"
                 }
             }
         }        
