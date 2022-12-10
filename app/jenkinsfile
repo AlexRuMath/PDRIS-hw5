@@ -36,7 +36,7 @@ pipeline{
         stage("Deploy to DEV"){
             steps{
                 script{
-                    sh "cd ./app && deploy-dev.sh"
+                    sh "cd ./app/app && deploy-dev.sh"
                 }
             }
         }
