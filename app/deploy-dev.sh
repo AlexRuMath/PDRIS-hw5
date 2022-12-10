@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name = "app-dev"
+name="app-dev"
 echo $name
 
 if ! docker ps --format '{{.Names}}' | grep -w $name &> /dev/null; then
