@@ -27,12 +27,18 @@ pipeline{
             }
         }
 
+        stage("Build image"){
+            steps {
+                sh "cd ./app && docker build -t ${dockerImageName} ."
+            }
+        }
+
         stage("Deploy to DEV"){
             agent any
 
             steps{
                 script{
-                    sh "cd ./dev && docker-compose up"
+                    sh "deploy-prod.sh"
                 }
             }
         }
@@ -49,7 +55,7 @@ pipeline{
 
             steps{
                 script{
-                    sh "cd ./prod && docker-compose up"
+                    sh "deploy-prod.sh"
                 }
             }
         }        
