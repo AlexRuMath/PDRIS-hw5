@@ -36,8 +36,8 @@ pipeline{
         stage("Deploy to DEV"){
             steps{
                 script{
-                    sh "pwd"
-                    sh "cd ./app && deploy-dev.sh"
+                    sh "cd ./app"
+                    sh "deploy-dev.sh"
                 }
             }
         }
@@ -52,7 +52,8 @@ pipeline{
         stage("Deploy to PROM"){
             steps{
                 script{
-                    sh "cd ./app && deploy-prod.sh"
+                    sh "cd ./app"
+                    sh "deploy-prod.sh"
                 }
             }
         }        
