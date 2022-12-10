@@ -34,11 +34,9 @@ pipeline{
         }
 
         stage("Deploy to DEV"){
-            agent any
-
             steps{
                 script{
-                    sh "cd ./ && deploy-dev.sh"
+                    sh "cd ./app && deploy-dev.sh"
                 }
             }
         }
@@ -51,11 +49,9 @@ pipeline{
         }
 
         stage("Deploy to PROM"){
-            agent any
-
             steps{
                 script{
-                    sh "cd ./ && deploy-prod.sh"
+                    sh "cd ./app && deploy-prod.sh"
                 }
             }
         }        
