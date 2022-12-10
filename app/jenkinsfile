@@ -37,6 +37,7 @@ pipeline{
             steps{
                 script{
                     sh "cd ./app"
+                    sh "ls -la ./"
                     sh "deploy-dev.sh"
                 }
             }
